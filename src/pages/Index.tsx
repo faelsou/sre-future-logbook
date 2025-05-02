@@ -6,8 +6,11 @@ import Hero from '@/components/Hero';
 import ManifestoSRE from '@/components/ManifestoSRE';
 import ProjectCard, { ProjectProps } from '@/components/ProjectCard';
 import { getProjectsByLevel } from '@/data/projects';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from '@/components/ui/button';
 
 const Index: React.FC = () => {
+  const { t } = useLanguage();
   const featuredProjects: ProjectProps[] = [
     ...getProjectsByLevel('iniciante').slice(0, 1),
     ...getProjectsByLevel('intermediario').slice(0, 1),
@@ -21,15 +24,17 @@ const Index: React.FC = () => {
       <main className="flex-1">
         <Hero />
         
-        <ManifestoSRE />
+        <div id="manifesto-sre">
+          <ManifestoSRE />
+        </div>
         
         <section className="py-16 container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">
-              Projetos em Destaque
+              {t('featured.title')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Conheça alguns dos nossos projetos práticos para diferentes níveis de experiência.
+              {t('featured.description')}
             </p>
           </div>
           
@@ -40,22 +45,21 @@ const Index: React.FC = () => {
           </div>
           
           <div className="flex justify-center">
-            <a 
-              href="/iniciante"
-              className="text-neon-cyan hover:text-neon-cyan/80 transition-colors underline underline-offset-4"
-            >
-              Ver todos os projetos
-            </a>
+            <Button asChild variant="link" className="text-neon-cyan hover:text-neon-cyan/80 transition-colors">
+              <a href="/iniciante">
+                {t('featured.viewAll')}
+              </a>
+            </Button>
           </div>
         </section>
         
         <section className="py-16 container mx-auto px-4 glass-effect rounded-xl mx-4 md:mx-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold mb-4 text-gradient">
-              Sua Jornada como SRE
+              {t('journey.title')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Descubra o caminho para se tornar um Site Reliability Engineer
+              {t('journey.description')}
             </p>
           </div>
           
@@ -65,10 +69,10 @@ const Index: React.FC = () => {
                 1
               </div>
               <h3 className="text-xl font-semibold mb-2">
-                Fundamentos
+                {t('journey.step1.title')}
               </h3>
               <p className="text-muted-foreground">
-                Domine as ferramentas básicas de monitoramento, containers e orquestração para construir uma base sólida.
+                {t('journey.step1.description')}
               </p>
             </div>
             
@@ -77,10 +81,10 @@ const Index: React.FC = () => {
                 2
               </div>
               <h3 className="text-xl font-semibold mb-2">
-                Automação e Eficiência
+                {t('journey.step2.title')}
               </h3>
               <p className="text-muted-foreground">
-                Aprimore suas habilidades com práticas de IaC, CI/CD, e estratégias avançadas de implantação.
+                {t('journey.step2.description')}
               </p>
             </div>
             
@@ -89,11 +93,48 @@ const Index: React.FC = () => {
                 3
               </div>
               <h3 className="text-xl font-semibold mb-2">
-                Resiliência em Escala
+                {t('journey.step3.title')}
               </h3>
               <p className="text-muted-foreground">
-                Domine arquiteturas resilientes, engenharia do caos e observabilidade avançada para sistemas de classe mundial.
+                {t('journey.step3.description')}
               </p>
+            </div>
+          </div>
+        </section>
+        
+        <section id="contact-form" className="py-16 container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold mb-6 text-center text-gradient">{t('contato')}</h2>
+            <div className="glass-effect p-6 rounded-xl">
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1" htmlFor="name">Nome</label>
+                  <input 
+                    type="text" 
+                    id="name" 
+                    className="w-full bg-background/80 border border-border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1" htmlFor="email">Email</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    className="w-full bg-background/80 border border-border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1" htmlFor="message">Mensagem</label>
+                  <textarea 
+                    id="message" 
+                    rows={5}
+                    className="w-full bg-background/80 border border-border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neon-cyan/50"
+                  ></textarea>
+                </div>
+                <Button className="w-full bg-neon-cyan hover:bg-neon-cyan/80 text-black">
+                  Enviar mensagem
+                </Button>
+              </form>
             </div>
           </div>
         </section>

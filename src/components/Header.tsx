@@ -3,9 +3,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageSelector from './LanguageSelector';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { t } = useLanguage();
+
+  const handleContactClick = () => {
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <header className="w-full py-4 px-4 md:px-8 backdrop-blur-md bg-background/80 sticky top-0 z-50 border-b border-border">
@@ -22,28 +29,31 @@ const Header: React.FC = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <Link to="/iniciante" className="hover:text-neon-cyan transition-colors">
-            Iniciante
+            {t('iniciante')}
           </Link>
           <Link to="/intermediario" className="hover:text-neon-cyan transition-colors">
-            Intermediário
+            {t('intermediario')}
           </Link>
           <Link to="/avancado" className="hover:text-neon-cyan transition-colors">
-            Avançado
+            {t('avancado')}
           </Link>
-          <Button variant="outline" className="neon-border">
-            Contato
+          <Button variant="outline" className="neon-border" onClick={handleContactClick}>
+            {t('contato')}
           </Button>
+          <LanguageSelector />
         </nav>
 
         {/* Mobile Menu Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </Button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSelector />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </Button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
@@ -55,28 +65,31 @@ const Header: React.FC = () => {
               className="py-2 hover:text-neon-cyan transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Iniciante
+              {t('iniciante')}
             </Link>
             <Link 
               to="/intermediario" 
               className="py-2 hover:text-neon-cyan transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Intermediário
+              {t('intermediario')}
             </Link>
             <Link 
               to="/avancado" 
               className="py-2 hover:text-neon-cyan transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Avançado
+              {t('avancado')}
             </Link>
             <Button 
               variant="outline" 
               className="w-full neon-border"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                setIsMenuOpen(false);
+                handleContactClick();
+              }}
             >
-              Contato
+              {t('contato')}
             </Button>
           </nav>
         </div>

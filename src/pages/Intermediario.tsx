@@ -5,9 +5,11 @@ import Footer from '@/components/Footer';
 import LevelHeader from '@/components/LevelHeader';
 import ProjectCard from '@/components/ProjectCard';
 import { getProjectsByLevel } from '@/data/projects';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Intermediario: React.FC = () => {
   const intermediarioProjects = getProjectsByLevel('intermediario');
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -15,8 +17,9 @@ const Intermediario: React.FC = () => {
       
       <main className="flex-1 container mx-auto px-4 py-16">
         <LevelHeader
-          title="Projetos Intermediários"
-          description="Avance suas habilidades de SRE com projetos que focam em automação, infraestrutura como código, integração contínua e estratégias de deployment modernas."
+          titleKey="intermediario.title"
+          descriptionKey="intermediario.description"
+          t={t}
         />
         
         <div className="card-grid">

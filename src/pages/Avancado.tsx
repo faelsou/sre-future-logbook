@@ -5,9 +5,11 @@ import Footer from '@/components/Footer';
 import LevelHeader from '@/components/LevelHeader';
 import ProjectCard from '@/components/ProjectCard';
 import { getProjectsByLevel } from '@/data/projects';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Avancado: React.FC = () => {
   const avancadoProjects = getProjectsByLevel('avancado');
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -15,8 +17,9 @@ const Avancado: React.FC = () => {
       
       <main className="flex-1 container mx-auto px-4 py-16">
         <LevelHeader
-          title="Projetos Avançados"
-          description="Domine técnicas avançadas de SRE com projetos desafiadores focados em arquiteturas resilientes, engenharia do caos, escalabilidade e observabilidade completa."
+          titleKey="avancado.title"
+          descriptionKey="avancado.description"
+          t={t}
         />
         
         <div className="card-grid">
