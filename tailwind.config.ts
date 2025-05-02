@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				neon: {
+					cyan: '#0CFFCD',
+					purple: '#9b87f5',
+					blue: '#0CB0FF'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +90,48 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'glow': {
+					'0%, 100%': {
+						textShadow: '0 0 5px rgba(12, 255, 205, 0.5), 0 0 10px rgba(12, 255, 205, 0.3)'
+					},
+					'50%': {
+						textShadow: '0 0 15px rgba(12, 255, 205, 0.8), 0 0 20px rgba(12, 255, 205, 0.5)'
+					}
+				},
+				'pulse-border': {
+					'0%, 100%': {
+						boxShadow: '0 0 0 0 rgba(12, 255, 205, 0)'
+					},
+					'50%': {
+						boxShadow: '0 0 0 2px rgba(12, 255, 205, 0.5)'
+					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'glow': 'glow 2s ease-in-out infinite',
+				'pulse-border': 'pulse-border 2s ease-in-out infinite',
+				'fade-in': 'fade-in 0.5s ease-out'
+			},
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				mono: ['Roboto Mono', 'monospace']
+			},
+			boxShadow: {
+				'neon': '0 0 5px rgba(12, 255, 205, 0.5), 0 0 10px rgba(12, 255, 205, 0.3)',
+				'neon-strong': '0 0 10px rgba(12, 255, 205, 0.8), 0 0 20px rgba(12, 255, 205, 0.5)'
 			}
 		}
 	},
