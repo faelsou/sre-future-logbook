@@ -5,14 +5,11 @@ import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSelector from './LanguageSelector';
+import ContactDialog from './ContactDialog';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { t } = useLanguage();
-
-  const handleContactClick = () => {
-    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <header className="w-full py-4 px-4 md:px-8 backdrop-blur-md bg-background/80 sticky top-0 z-50 border-b border-border">
@@ -37,9 +34,11 @@ const Header: React.FC = () => {
           <Link to="/avancado" className="hover:text-neon-cyan transition-colors">
             {t('avancado')}
           </Link>
-          <Button variant="outline" className="neon-border" onClick={handleContactClick}>
-            {t('contato')}
-          </Button>
+          <ContactDialog>
+            <Button variant="outline" className="neon-border">
+              {t('contato')}
+            </Button>
+          </ContactDialog>
           <LanguageSelector />
         </nav>
 
@@ -81,16 +80,15 @@ const Header: React.FC = () => {
             >
               {t('avancado')}
             </Link>
-            <Button 
-              variant="outline" 
-              className="w-full neon-border"
-              onClick={() => {
-                setIsMenuOpen(false);
-                handleContactClick();
-              }}
-            >
-              {t('contato')}
-            </Button>
+            <ContactDialog>
+              <Button 
+                variant="outline" 
+                className="w-full neon-border"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t('contato')}
+              </Button>
+            </ContactDialog>
           </nav>
         </div>
       )}
