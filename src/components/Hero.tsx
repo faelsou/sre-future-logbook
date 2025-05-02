@@ -23,7 +23,12 @@ const Hero: React.FC = () => {
         </div>
         
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-          {t('hero.title')}
+          {t('hero.title').split('SRE').map((part, i, arr) => (
+            <React.Fragment key={i}>
+              {part}
+              {i < arr.length - 1 && <span className="font-mono text-gradient animate-glow">[SRE]</span>}
+            </React.Fragment>
+          ))}
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10">
